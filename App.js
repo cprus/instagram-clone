@@ -13,16 +13,17 @@ import LoginScreen from './components/auth/Login';
 import RegisterScreen from './components/auth/Register';
 import MainScreen from './components/Main';
 import AddScreen from './components/main/Add';
+import SaveScreen from './components/main/Save';
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDIf8vO7IlroUdmu12S7uTMVl6QmnB8cMw",
-  authDomain: "instagram-dev-59069.firebaseapp.com",
-  projectId: "instagram-dev-59069",
-  storageBucket: "instagram-dev-59069.appspot.com",
-  messagingSenderId: "132276455158",
-  appId: "1:132276455158:web:48d97aa59e3ec7d1f20ed7"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJ_ID,
+  storageBucket: process.env.REACT_APP_STOR_BUCKET,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 if (firebase.apps.length === 0){
@@ -82,7 +83,8 @@ export class App extends Component {
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Main">
             <Stack.Screen name="Main" component={MainScreen} options={{ headerShown: false }} />
-            <Stack.Screen name="Add" component={AddScreen} />
+            <Stack.Screen name="Add" component={AddScreen} navigation={this.props.navigation} />
+            <Stack.Screen name="Save" component={SaveScreen} navigation={this.props.navigation}/>
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
